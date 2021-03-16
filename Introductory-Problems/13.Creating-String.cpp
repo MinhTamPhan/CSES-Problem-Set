@@ -20,7 +20,7 @@ int n;
 void search(set<string>& permu, const string& s) {
     if (permutation.size() == n) {
         string val = "";
-        for (int e : permutation) val.push_back(s[permutation[e]]);
+        for (int e : permutation) val.push_back(s[e]);
         permu.insert(val);
     } else {
         for (int i = 0; i < n; i++) {
