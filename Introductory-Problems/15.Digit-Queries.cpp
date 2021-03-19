@@ -2,6 +2,7 @@
 #define ll long long
 using namespace std;
 ll a[1000005], b[200005], c[200005];
+
 string tostring(ll x) {
     string s = "";
     while (x) {
