@@ -11,7 +11,6 @@ int main() {
         sum /= 2;
         cout << "YES\n";
         vector<long long> s1, s2;
-
         while (n > 0) {
             if (sum - n >= 0) {
                 sum -= n;
