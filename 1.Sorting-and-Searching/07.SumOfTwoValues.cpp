@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+/**
+ * Bạn được cung cấp một mảng @n số nguyên và 
+ * nhiệm vụ của bạn là tìm hai giá trị (ở các vị trí khác nhau) có tổng là @target.
+ */
 int main() {
     int n, target;
     cin >> n >> target;
