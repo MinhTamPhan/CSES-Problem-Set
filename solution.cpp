@@ -7,7 +7,7 @@ vector<int64_t> sumQueries(const vector<int32_t> &a, const vector<pair<int32_t, 
     int n = a.size() + 1;
     vector<int64_t> preSum(n, 0), result;
     for (size_t i = 1; i < n; i++)
-        preSum[i] = a[i] + preSum[i - 1];
+        preSum[i] = a[i - 1] + preSum[i - 1];
 
     for (auto item : queries) {
         int l, r;
@@ -17,10 +17,17 @@ vector<int64_t> sumQueries(const vector<int32_t> &a, const vector<pair<int32_t, 
     return result;
 }
 
-vector<int64_t> mulQueries(const vector<int32_t> &a, const vector<pair<int32_t, int32_t>> &queries) {
-    vector<int64_t> preSum, result;
-    // int left, right;
-    // tie(left, right) = queries[0]
+vector<uint64_t> mulQueries(const vector<int32_t> &a, const vector<pair<int32_t, int32_t>> &queries) {
+    int n = a.size() + 1;
+    vector<uint64_t> preMul(n), result;
+    preMul[0] = 1;
+    for (size_t i = 1; i < n; i++)
+        preMul[i] = a[i - 1] * preMul[i - 1];
+    for (auto item : queries) {
+        int l, r;
+        tie(l, r) = item;
+        result.push_back(preMul[r] / preMul[l - 1]);
+    }
     return result;
 }
 
@@ -39,13 +46,15 @@ int main(int argc, char *argv[]) {
         for (auto &e : queries) cin >> e.first >> e.second;
 
         out << "Testcase #" << testcase << endl;
-        vector<int64_t> result;
-        if (isSum)
-            result = sumQueries(input, queries);
-        else
-            result = mulQueries(input, queries);
-        for (int64_t item : result)
-            out << item << endl;
+        if (isSum) {
+            vector<int64_t> result = sumQueries(input, queries);
+            for (int64_t item : result)
+                out << item << endl;
+        } else {
+            vector<uint64_t> result = mulQueries(input, queries);
+            for (int64_t item : result)
+                out << item << endl;
+        }
     }
     out.close();
     cout << "Total runtime: " << ((clock() - start) / 1000) << " miliseconds" << endl;
